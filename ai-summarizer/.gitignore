@@ -1,0 +1,32 @@
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+# Ignore environment files
+.env
+
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Ignore Lambda build files
+terraform/lambda_function/lambda_function.zip
+terraform/lambda_function/.Python
+terraform/lambda_function/__pycache__
+terraform/lambda_function/*.pyc
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.swo
+.DS_Store
+
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+*.iml
+
+# Ignore node_modules for web dependencies (if any)
+web/node_modules/
