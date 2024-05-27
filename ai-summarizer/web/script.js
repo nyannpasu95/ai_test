@@ -1,6 +1,8 @@
+/*global fetch*/
+
 async function sendMessage() {
     const userMessage = document.getElementById('userMessage').value;
-    const response = await fetch('YOUR_API_GATEWAY_URL/chat', {
+    const response = await fetch('https://4y5jz8k57d.execute-api.ap-northeast-1.amazonaws.com/v1/chat', {
         method: 'POST',
         body: JSON.stringify({ message: userMessage }),
         headers: {
