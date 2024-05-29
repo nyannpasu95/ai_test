@@ -1,16 +1,17 @@
-import openai
 import os
 import json
-from openai import OpenAI
+import openai
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Get API Key from environment variable OPENAI_API_KEY
+client = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 def lambda_handler(event, context):
+    # Parse the incoming JSON payload
     body = json.loads(event['body'])
     user_message = body.get('message', '')
-    client = OpenAI()
 
-    completion = client.chat.completions.create(
+    # Create a chat completion using OpenAI's GPT-3.5-turbo
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
@@ -18,9 +19,13 @@ def lambda_handler(event, context):
         ]
     )
 
-    chatbot_reply = completion.choices[0].message['content'].strip()
-
+    # Structure the return response for API Gateway
     return {
         'statusCode': 200,
-        'body': json.dumps({'reply': chatbot_reply})
+        'headers': {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        },
+        'body': response.choices[0].message.content
     }
