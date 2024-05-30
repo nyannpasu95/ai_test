@@ -9,10 +9,10 @@ resource "aws_s3_bucket" "static_files" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow"
+        Effect    = "Allow"
         Principal = "*"
-        Action = "s3:GetObject"
-        Resource = "arn:aws:s3:::chatbot-static-files-20240523/*"
+        Action    = "s3:GetObject"
+        Resource  = "arn:aws:s3:::chatbot-static-files-20240523/*"
       }
     ]
   })
